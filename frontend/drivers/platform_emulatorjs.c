@@ -142,6 +142,26 @@ void cmd_save_state(void)
    command_event(CMD_EVENT_SAVE_STATE, NULL);
 }
 
+void cmd_set_aspect_ratio(int use_full)
+{
+   settings_t *settings = config_get_ptr();
+
+   if (!settings)
+      return;
+
+   /* use_full: 1 = FULL (拉伸铺满), 0 = 4:3 */
+   if (use_full)
+   {
+      configuration_set_uint(settings, settings->uints.video_aspect_ratio_idx, ASPECT_RATIO_FULL);
+      printf("[EMSCRIPTEN] Aspect ratio set to FULL (stretched).\n");
+   }
+   else
+   {
+      configuration_set_uint(settings, settings->uints.video_aspect_ratio_idx, ASPECT_RATIO_4_3);
+      printf("[EMSCRIPTEN] Aspect ratio set to 4:3.\n");
+   }
+}
+
 void set_cheat(unsigned index, bool enabled, const char *code)
 {
    retro_cheat_set(index, enabled, code);
