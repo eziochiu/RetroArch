@@ -171,23 +171,23 @@ void cmd_toggle_fullscreen(void)
    command_event(CMD_EVENT_FULLSCREEN_TOGGLE, NULL);
 }
 
-void cmd_toggle_aspect_ratio(void)
+void cmd_set_aspect_ratio(int use_full)
 {
    settings_t *settings = config_get_ptr();
 
    if (!settings)
       return;
 
-   /* 在 4:3 和 FULL 之间切换 */
-   if (settings->uints.video_aspect_ratio_idx == ASPECT_RATIO_4_3)
+   /* use_full: 1 = FULL (拉伸铺满), 0 = 4:3 */
+   if (use_full)
    {
       configuration_set_uint(settings, settings->uints.video_aspect_ratio_idx, ASPECT_RATIO_FULL);
-      RARCH_LOG("[EMSCRIPTEN] Aspect ratio switched to FULL (stretched).\n");
+      RARCH_LOG("[EMSCRIPTEN] Aspect ratio set to FULL (stretched).\n");
    }
    else
    {
       configuration_set_uint(settings, settings->uints.video_aspect_ratio_idx, ASPECT_RATIO_4_3);
-      RARCH_LOG("[EMSCRIPTEN] Aspect ratio switched to 4:3.\n");
+      RARCH_LOG("[EMSCRIPTEN] Aspect ratio set to 4:3.\n");
    }
 }
 
