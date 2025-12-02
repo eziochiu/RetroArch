@@ -160,8 +160,7 @@ void cmd_set_aspect_ratio(int use_full)
       printf("[EMSCRIPTEN] Aspect ratio set to 4:3.\n");
    }
 
-   /* 重新初始化视频驱动，使宽高比立即生效 */
-   command_event(CMD_EVENT_REINIT, NULL);
+   command_event(CMD_EVENT_VIDEO_SET_ASPECT_RATIO, NULL);
 }
 
 void set_cheat(unsigned index, bool enabled, const char *code)
