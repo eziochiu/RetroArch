@@ -178,7 +178,6 @@ void cmd_set_aspect_ratio(int use_full)
    if (!settings)
       return;
 
-   /* use_full: 1 = FULL (拉伸铺满), 0 = 4:3 */
    if (use_full)
    {
       configuration_set_uint(settings, settings->uints.video_aspect_ratio_idx, ASPECT_RATIO_FULL);
@@ -189,6 +188,8 @@ void cmd_set_aspect_ratio(int use_full)
       configuration_set_uint(settings, settings->uints.video_aspect_ratio_idx, ASPECT_RATIO_4_3);
       RARCH_LOG("[EMSCRIPTEN] Aspect ratio set to 4:3.\n");
    }
+
+   command_event(CMD_EVENT_VIDEO_SET_ASPECT_RATIO, NULL);
 }
 
 void cmd_take_screenshot(void)
