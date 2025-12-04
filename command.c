@@ -1955,6 +1955,23 @@ void shader_enable(int enabled)
         command_set_shader(NULL, "");
     }
 }
+
+/* Wrapper functions to expose libretro core functions to JavaScript */
+void *retro_get_memory_data(unsigned id)
+{
+   runloop_state_t *runloop_st = runloop_state_get_ptr();
+   if (!runloop_st)
+      return NULL;
+   return runloop_st->current_core.retro_get_memory_data(id);
+}
+
+size_t retro_get_memory_size(unsigned id)
+{
+   runloop_state_t *runloop_st = runloop_state_get_ptr();
+   if (!runloop_st)
+      return 0;
+   return runloop_st->current_core.retro_get_memory_size(id);
+}
 #endif
 
 #ifdef HAVE_CONFIGFILE
